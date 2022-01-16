@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Multi-Stalker-install/main/Downloads/installer.sh -O - | /bin/sh
 VERSION=1.3
@@ -122,16 +122,21 @@ fi
 
 if [ ! -f $STALKER_CONF ]; then
 
-   wget -q  "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Multi-Stalker-install/main/Downloads/stalker-conf.tar.gz -O /tmp/stalker-conf.tar.gz
-   tar -xzf /tmp/stalker-conf.tar.gz  -C /
-   rm -f /tmp/stalker-conf.tar.gz 
-    echo "Send $STALKER_CONF"
+ ifconfig eth0 | awk '/HWaddr/ {print $NF}' >> /home/text2.txt
+ echo "portal 0 http://mag.marsweb.co:8000/c?mac=" >> /home/text1.txt
+ echo "portal 1 http://mag.dino.ws/c?mac=" >> /home/text3.txt
+ cd /home
+  paste -d "\0" text1.txt text2.txt  > text4.txt
+  paste -d "\0" text3.txt text2.txt > text5.txt
+  paste -d "\n" text4.txt text5.txt > stalker.conf
+  
+    rm *.txt 
 fi
 
 echo ""
 echo "#########################################################"
-echo "#     MultiStalker $VERSION INSTALLED SUCCESSFULLY          #"
-echo "#                    BY ziko-ZR1                        #"
+echo "#     MultiStalker $VERSION INSTALLED SUCCESSFULLY           #"
+echo "#                    BY PvdH (c)2022                    #"
 echo "#########################################################"
 echo "#                Restart Enigma2 GUI                    #"
 echo "#########################################################"
